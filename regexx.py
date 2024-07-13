@@ -13,7 +13,7 @@ def parse_user_request_with_regex(request, df):
     group_by_pattern = r"group\s+by\s+(.+?)(?:\s+filter\s+by|$|\s+order\s+by|$)"
     filters_pattern = r"filter\s+by\s+(.+?)(?:\s+order\s+by|$)"
     order_by_pattern = r"order\s+by\s+(.+)"
-    condition_extraction_pattern = r"(\w+)\s*(=|>|<|>=|<=)\s*'*(\w+)'*"
+    condition_extraction_pattern = r"(\w+)\s*(=|>|<|>=|<=)\s*'([^']*)'"
 
     # Initialize results
     chart_type = None
@@ -129,13 +129,8 @@ def parse_user_request_with_regex(request, df):
     plt.show()
 
 def main():
-    #user_input = "Give me a bar plot of the math_score , reading_score where reading_score = 75 order by math_score"
-    user_input = "Show me a pie chart of race ethnicity where lunch = 'standard' and test_preparation_course = 'none' "
-    df = pd.read_csv("study_performance.csv")
-
-
-   # user_input = "Show me a pie chart of Duration Watched where genre ='Comedy' "
-   # df = pd.read_csv("streaming_viewership_data.csv")
+    user_input = "pie chart on lostBytesClient group by appName where bytesFromClient equal 200 order by lostBytesClient"
+    df = pd.read_csv("converted.csv")
     parse_user_request_with_regex(user_input, df)
 
 if __name__ == "__main__":
